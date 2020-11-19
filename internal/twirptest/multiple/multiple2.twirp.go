@@ -13,8 +13,8 @@ import strconv "strconv"
 
 import jsonpb "github.com/golang/protobuf/jsonpb"
 import proto "github.com/golang/protobuf/proto"
-import twirp "github.com/twitchtv/twirp"
-import ctxsetters "github.com/twitchtv/twirp/ctxsetters"
+import twirp "github.com/3ventic/twirp"
+import ctxsetters "github.com/3ventic/twirp/ctxsetters"
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the twirp package used in your project.

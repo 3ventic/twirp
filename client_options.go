@@ -134,7 +134,7 @@ func WithClientPathPrefix(prefix string) ClientOption {
 
 // WithClientLiteralURLs configures the Twirp client to use the exact values
 // as defined in the proto file for Service and Method names,
-// fixing the issue https://github.com/twitchtv/twirp/issues/244, which is manifested
+// fixing the issue https://github.com/3ventic/twirp/issues/244, which is manifested
 // when working with Twirp services implemented other languages (e.g. Python) and the proto file definitions
 // are not properly following the [Protobuf Style Guide](https://developers.google.com/protocol-buffers/docs/style#services).
 // By default (false), Go clients modify the routes by CamelCasing the values. For example,

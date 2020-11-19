@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/twitchtv/twirp"
+	"github.com/3ventic/twirp"
 )
 
 type myError string

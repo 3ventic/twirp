@@ -29,9 +29,9 @@ import (
 	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
 	"github.com/pkg/errors"
-	"github.com/twitchtv/twirp/internal/gen"
-	"github.com/twitchtv/twirp/internal/gen/stringutils"
-	"github.com/twitchtv/twirp/internal/gen/typemap"
+	"github.com/3ventic/twirp/internal/gen"
+	"github.com/3ventic/twirp/internal/gen/stringutils"
+	"github.com/3ventic/twirp/internal/gen/typemap"
 )
 
 type twirp struct {
@@ -260,7 +260,7 @@ func (t *twirp) generateFileHeader(file *descriptor.FileDescriptorProto) {
 	if t.filesHandled == 0 {
 		t.P("/*")
 		t.P("Package ", t.genPkgName, " is a generated twirp stub package.")
-		t.P("This code was generated with github.com/twitchtv/twirp/protoc-gen-twirp ", gen.Version, ".")
+		t.P("This code was generated with github.com/3ventic/twirp/protoc-gen-twirp ", gen.Version, ".")
 		t.P()
 		comment, err := t.reg.FileComments(file)
 		if err == nil && comment.Leading != "" {
@@ -299,8 +299,8 @@ func (t *twirp) generateImports(file *descriptor.FileDescriptorProto) {
 	// dependency imports
 	t.P(`import `, t.pkgs["jsonpb"], ` "github.com/golang/protobuf/jsonpb"`)
 	t.P(`import `, t.pkgs["proto"], ` "github.com/golang/protobuf/proto"`)
-	t.P(`import `, t.pkgs["twirp"], ` "github.com/twitchtv/twirp"`)
-	t.P(`import `, t.pkgs["ctxsetters"], ` "github.com/twitchtv/twirp/ctxsetters"`)
+	t.P(`import `, t.pkgs["twirp"], ` "github.com/3ventic/twirp"`)
+	t.P(`import `, t.pkgs["ctxsetters"], ` "github.com/3ventic/twirp/ctxsetters"`)
 	t.P()
 
 	// It's legal to import a message and use it as an input or output for a
@@ -1193,7 +1193,7 @@ func (t *twirp) generateServerRouting(servStruct string, file *descriptor.FileDe
 	t.P(`  prefix, pkgService, method := parseTwirpPath(req.URL.Path)`)
 	if pkgServNameLit == pkgServNameCc {
 		t.P(`  if pkgService != `, strconv.Quote(pkgServNameLit), ` {`)
-	} else { // proto service name is not CamelCased, but need to support CamelCased routes for Go clients (https://github.com/twitchtv/twirp/pull/257)
+	} else { // proto service name is not CamelCased, but need to support CamelCased routes for Go clients (https://github.com/3ventic/twirp/pull/257)
 		t.P(`  if pkgService != `, strconv.Quote(pkgServNameLit), ` && pkgService != `, strconv.Quote(pkgServNameCc), ` {`)
 	}
 	t.P(`    msg := `, t.pkgs["fmt"], `.Sprintf("no handler for path %q", req.URL.Path)`)
@@ -1213,7 +1213,7 @@ func (t *twirp) generateServerRouting(servStruct string, file *descriptor.FileDe
 
 		if methNameCc == methNameLit {
 			t.P(`  case `, strconv.Quote(methNameLit), `:`)
-		} else { // proto method name is not CamelCased, but need to support CamelCased routes for Go clients (https://github.com/twitchtv/twirp/pull/257)
+		} else { // proto method name is not CamelCased, but need to support CamelCased routes for Go clients (https://github.com/3ventic/twirp/pull/257)
 			t.P(`  case `, strconv.Quote(methNameLit), `, `, strconv.Quote(methNameCc), `:`)
 		}
 		t.P(`    s.serve`, methNameCc, `(ctx, resp, req)`)
