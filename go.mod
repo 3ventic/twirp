@@ -1,4 +1,4 @@
-module github.com/twitchtv/twirp
+module github.com/3ventic/twirp
 
 go 1.15
 
